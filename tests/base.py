@@ -20,10 +20,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import sys
+import os
 import json
 
-sys.path.append('.')
+cwd = os.path.dirname(os.path.abspath(__file__))
+
+
+class MockRequest(object):
+    def __init__(self):
+        self.registry = {}
+
+    def __call__(self, *args, **kwargs):
+        return self._request(*args, **kwargs)
+
+    def register_uri(self, method, url, fixture):
+        key = '%s:%s' % (method, url)
+        with open(os.path.join(cwd, 'fixtures', fixture)) as f:
+            self.registry[key] = json.load(f)
+
+    def _request(self, url, method='GET', params=None):
+        key = '%s:%s' % (method, url)
+        if key not in self.registry:
+            raise Exception('Mock not found ' + key)
+
+        return self.registry[key]
 
 
 class BaseTest(object):
