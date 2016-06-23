@@ -78,6 +78,11 @@ class AuthTest(BaseTest, unittest.TestCase):
         self.auth.set_request_apikey('foobar')
         self.assertEqual(self.auth._api_key, 'foobar')
 
+    def test_get_request_endpoint(self):
+        """Test Auth.auth.get_request_endpoint() method"""
+        url = self.auth.get_request_endpoint()
+        self.assertEqual(self.auth._endpoint, url)
+
     def test_get_request_headers(self):
         """Test Auth.get_request_headers() method"""
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
