@@ -4,17 +4,17 @@ import json
 import logging
 from .errors import ApiHandlerError
 
+log = logging.getLogger(__name__)
+
 try:
     # python3
-    from urllib.request import urlopen, Request
-    from urllib.error import URLError
+    from urllib.request import build_opener, Request, HTTPHandler
+    from urllib.error import HTTPError
     from urllib.parse import urlencode
 except ImportError:  # pragma: no cover
     # python2
-    from urllib2 import urlopen, Request, URLError
+    from urllib2 import build_opener, Request, HTTPHandler, HTTPError
     from urllib import urlencode
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 
 class BaseResource(object):
@@ -24,34 +24,38 @@ class BaseResource(object):
 
         self._auth = auth
 
-    def _request(self, url, method='GET', params=None):
-        if params is not None:
-            params = urlencode(params)
-
+    def _request(self, url, method='GET', data=None):
         url = self._auth.get_request_endpoint() + url
         headers = self._auth.get_request_headers()
 
-        if params is not None:
-            if method == 'GET' or method == 'DELETE':
-                url = url + '?' + params
-                params = None
+        if data is not None:
+            data = urlencode(data)
+            if method in ['GET', 'DELETE']:
+                url = url + '?' + data
+                data = None
 
-        logging.info(method + ' ' + url)
-        logging.info(params)
+        log.debug(method + ' ' + url)
+        log.debug(data)
 
         try:
-            request = Request(url, params, headers)
+            opener = build_opener(HTTPHandler)
+            request = Request(url, data=data, headers=headers)
             request.get_method = lambda: method
-            response = urlopen(request)
-        except URLError as e:
-            logging.error(e)
-            response = e
-
-        try:
-            json_data = response.read()
-            data = json.loads(json_data.decode('utf-8'))
+            response = opener.open(request).read()
+            data = self._parse_response(response)
+        except HTTPError as e:
+            log.error(e)
+            data = self._parse_response(e.read())
+            raise ApiHandlerError('Invalid server response', data)
         except ValueError as e:
-            logging.error(e)
+            log.error(e)
             raise ApiHandlerError('Invalid server response')
 
         return data
+
+    @staticmethod
+    def _parse_response(response):
+        try:
+            return json.loads(response.decode('utf-8'))
+        except ValueError:
+            return False

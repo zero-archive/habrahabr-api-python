@@ -37,10 +37,11 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        auth._endpoint = 'https://httpbin.org'
         self.base = habrahabr.BaseResource(auth)
 
     def test_request_get(self):
-        r = self.base._request('https://httpbin.org/get', 'GET', {
+        r = self.base._request('/get', 'GET', {
             'foo': 'bar'
         })
 
@@ -49,7 +50,7 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
         self.assertEqual(r['headers']['Token'], 'foobar')
 
     def test_request_post(self):
-        r = self.base._request('https://httpbin.org/post', 'POST', {
+        r = self.base._request('/post', 'POST', {
             'foo': 'bar'
         })
 
@@ -59,7 +60,7 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
         self.assertEqual(r['form']['foo'], 'bar')
 
     def test_request_put(self):
-        r = self.base._request('https://httpbin.org/put', 'PUT', {
+        r = self.base._request('/put', 'PUT', {
             'foo': 'bar'
         })
 
@@ -69,7 +70,7 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
         self.assertEqual(r['form']['foo'], 'bar')
 
     def test_request_delete(self):
-        r = self.base._request('https://httpbin.org/delete', 'DELETE', {
+        r = self.base._request('/delete', 'DELETE', {
             'foo': 'bar'
         })
         self.assertEqual(r['url'], 'https://httpbin.org/delete?foo=bar')
