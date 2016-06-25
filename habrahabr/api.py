@@ -23,6 +23,8 @@
 from .post import PostResource
 from .comments import CommentsResource
 from .company import CompanyResource
+from .feed import FeedResource
+from .flow import FlowResource
 from .errors import ApiHandlerError
 
 
@@ -35,3 +37,5 @@ class Api(object):
         self.post = PostResource(self.auth)
         self.comments = CommentsResource(self.auth)
         self.company = CompanyResource(self.auth)
+        self.feed = FeedResource(self.auth)
+        self.flow = FlowResource(self.auth)
