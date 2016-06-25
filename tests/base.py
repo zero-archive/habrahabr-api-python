@@ -23,22 +23,42 @@
 import os
 import json
 
+try:
+    # python3
+    from urllib.parse import urlencode
+except ImportError:  # pragma: no cover
+    # python2
+    from urllib import urlencode
+
 cwd = os.path.dirname(os.path.abspath(__file__))
 
 
 class MockRequest(object):
     def __init__(self):
         self.registry = {}
+        self.fixture_ok = {
+            'ok': 1,
+            'server_time': '2016-04-15T13:12:45+03:00'
+        }
 
     def __call__(self, *args, **kwargs):
         return self._request(*args, **kwargs)
 
-    def register_uri(self, method, url, fixture):
+    def register_uri(self, method, url, fixture=None):
         key = '%s:%s' % (method, url)
-        with open(os.path.join(cwd, 'fixtures', fixture)) as f:
-            self.registry[key] = json.load(f)
+        if fixture is not None:
+            with open(os.path.join(cwd, 'fixtures', fixture)) as f:
+                self.registry[key] = json.load(f)
+        else:
+            self.registry[key] = self.fixture_ok
 
-    def _request(self, url, method='GET', params=None):
+    def _request(self, url, method='GET', data=None):
+        if data is not None:
+            data = urlencode(data)
+            if method in ['GET', 'DELETE']:
+                url = url + '?' + data
+                data = None
+
         key = '%s:%s' % (method, url)
         if key not in self.registry:
             raise Exception('Mock not found ' + key)
