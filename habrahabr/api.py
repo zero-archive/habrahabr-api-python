@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 from .post import PostResource
+from .comments import CommentsResource
 from .errors import ApiHandlerError
 
 
@@ -31,3 +32,4 @@ class Api(object):
 
         self.auth = auth
         self.post = PostResource(self.auth)
+        self.comments = CommentsResource(self.auth)
