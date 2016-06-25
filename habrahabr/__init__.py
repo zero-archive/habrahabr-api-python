@@ -25,6 +25,7 @@ from .api import Api
 from .base import BaseResource
 from .post import PostResource
 from .comments import CommentsResource
+from .company import CompanyResource
 from .errors import AuthHandlerError, ApiHandlerError
 
 # Set default logging handler to avoid "No handler found" warnings.
@@ -42,4 +43,4 @@ logging.getLogger(__name__).addHandler(NullHandler())
 __author__ = 'mail@dotzero.ru'
 __version__ = '0.1.0'
 __all__ = ('Auth', 'Api', 'PostResource', 'CommentsResource',
-           'AuthHandlerError', 'ApiHandlerError')
+           'CompanyResource', 'AuthHandlerError', 'ApiHandlerError')
