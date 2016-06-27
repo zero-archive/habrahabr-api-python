@@ -29,6 +29,7 @@ from .hub import HubResource
 from .poll import PollResource
 from .search import SearchResource
 from .settings import SettingsResource
+from .tracker import TrackerResource
 from .errors import ApiHandlerError
 
 
@@ -47,3 +48,4 @@ class Api(object):
         self.poll = PollResource(self.auth)
         self.search = SearchResource(self.auth)
         self.settings = SettingsResource(self.auth)
+        self.tracker = TrackerResource(self.auth)
