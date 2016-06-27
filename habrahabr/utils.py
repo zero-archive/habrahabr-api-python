@@ -26,7 +26,7 @@ from functools import wraps
 def accepts(*types):
     def decorated(f):
         # don't forget self
-        assert 1 + len(types) == f.func_code.co_argcount
+        assert 1 + len(types) == f.__code__.co_argcount
 
         @wraps(f)
         def wrapped(*args, **kwargs):

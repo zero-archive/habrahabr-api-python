@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import sys
 import json
 import logging
 from .errors import ApiHandlerError
@@ -53,6 +54,10 @@ class BaseResource(object):
             if method in ['GET', 'DELETE']:
                 url = url + '?' + data
                 data = None
+            else:
+                headers.update({'Content-Type': 'application/x-www-form-urlencoded ; charset=utf-8'})
+                if sys.version_info > (3,):  # python3
+                    data = data.encode('utf-8')
 
         log.debug(method + ' ' + url)
         log.debug(data)

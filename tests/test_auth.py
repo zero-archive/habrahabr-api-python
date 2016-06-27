@@ -100,10 +100,11 @@ class AuthTest(BaseTest, unittest.TestCase):
         """Test Auth.get_authorization_url() method"""
         self.auth.set_request_client('foo.bar')
         url = self.auth.get_authorization_url('https://tmtm.ru/', 'token')
-        self.assertTrue(url.endswith(
-            '/auth/o/login/?redirect_uri=' +
-            'https%3A%2F%2Ftmtm.ru%2F&response_type=token&client_id=foo.bar'
-        ))
+
+        self.assertTrue('/auth/o/login/' in url)
+        self.assertTrue('response_type=token' in url)
+        self.assertTrue('client_id=foo.bar' in url)
+        self.assertTrue('redirect_uri=https%3A%2F%2Ftmtm.ru%2F' in url)
 
 
 if __name__ == '__main__':
