@@ -29,6 +29,7 @@ from .company import CompanyResource
 from .feed import FeedResource
 from .flow import FlowResource
 from .hub import HubResource
+from .poll import PollResource
 from .errors import AuthHandlerError, ApiHandlerError
 
 # Set default logging handler to avoid "No handler found" warnings.
@@ -47,4 +48,4 @@ __author__ = 'mail@dotzero.ru'
 __version__ = '0.1.0'
 __all__ = ('Auth', 'Api', 'PostResource', 'CommentsResource', 'CompanyResource',
            'FeedResource', 'FlowResource', 'AuthHandlerError', 'HubResource',
-           'ApiHandlerError')
+           'PollResource', 'ApiHandlerError')

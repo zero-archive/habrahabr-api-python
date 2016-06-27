@@ -26,6 +26,7 @@ from .company import CompanyResource
 from .feed import FeedResource
 from .flow import FlowResource
 from .hub import HubResource
+from .poll import PollResource
 from .errors import ApiHandlerError
 
 
@@ -41,3 +42,4 @@ class Api(object):
         self.feed = FeedResource(self.auth)
         self.flow = FlowResource(self.auth)
         self.hub = HubResource(self.auth)
+        self.poll = PollResource(self.auth)
