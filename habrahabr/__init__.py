@@ -33,6 +33,7 @@ from .poll import PollResource
 from .search import SearchResource
 from .settings import SettingsResource
 from .tracker import TrackerResource
+from .user import UserResource
 from .errors import AuthHandlerError, ApiHandlerError
 
 # Set default logging handler to avoid "No handler found" warnings.
@@ -52,4 +53,4 @@ __version__ = '0.1.0'
 __all__ = ('Auth', 'Api', 'PostResource', 'CommentsResource', 'CompanyResource',
            'FeedResource', 'FlowResource', 'AuthHandlerError', 'HubResource',
            'PollResource', 'SettingsResource', 'SearchResource', 'TrackerResource',
-           'ApiHandlerError')
+           'UserResource', 'ApiHandlerError')
