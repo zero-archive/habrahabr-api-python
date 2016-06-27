@@ -22,7 +22,6 @@
 
 from .auth import Auth
 from .api import Api
-from .base import BaseResource
 from .post import PostResource
 from .comments import CommentsResource
 from .company import CompanyResource
@@ -50,7 +49,8 @@ logging.getLogger(__name__).addHandler(NullHandler())
 
 __author__ = 'mail@dotzero.ru'
 __version__ = '0.1.0'
-__all__ = ('Auth', 'Api', 'PostResource', 'CommentsResource', 'CompanyResource',
-           'FeedResource', 'FlowResource', 'AuthHandlerError', 'HubResource',
-           'PollResource', 'SettingsResource', 'SearchResource', 'TrackerResource',
+__all__ = ('Auth', 'Api', 'PostResource', 'CommentsResource',
+           'CompanyResource', 'FeedResource', 'FlowResource',
+           'AuthHandlerError', 'HubResource', 'PollResource',
+           'SettingsResource', 'SearchResource', 'TrackerResource',
            'UserResource', 'ApiHandlerError')

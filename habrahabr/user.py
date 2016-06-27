@@ -151,7 +151,8 @@ class UserResource(BaseResource):
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/users/%s/favorites/posts?page=%d' % (login, page))
+        return self._request('/users/%s/favorites/posts?page=%d' %
+                             (login, page))
 
     @accepts(str, int)
     def favorites_comments(self, login, page=1):
@@ -162,4 +163,5 @@ class UserResource(BaseResource):
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/users/%s/favorites/comments?page=%d' % (login, page))
+        return self._request('/users/%s/favorites/comments?page=%d' %
+                             (login, page))

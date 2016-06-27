@@ -25,8 +25,6 @@ import json
 import logging
 from .errors import ApiHandlerError
 
-log = logging.getLogger(__name__)
-
 try:
     # python3
     from urllib.request import build_opener, Request, HTTPHandler
@@ -36,6 +34,10 @@ except ImportError:  # pragma: no cover
     # python2
     from urllib2 import build_opener, Request, HTTPHandler, HTTPError
     from urllib import urlencode
+
+log = logging.getLogger(__name__)
+
+POST_CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=utf-8'
 
 
 class BaseResource(object):
@@ -55,7 +57,7 @@ class BaseResource(object):
                 url = url + '?' + data
                 data = None
             else:
-                headers.update({'Content-Type': 'application/x-www-form-urlencoded ; charset=utf-8'})
+                headers.update({'Content-Type': POST_CONTENT_TYPE})
                 if sys.version_info > (3,):  # python3
                     data = data.encode('utf-8')
 
