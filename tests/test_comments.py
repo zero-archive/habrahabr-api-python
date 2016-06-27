@@ -38,8 +38,9 @@ class CommentsResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.CommentsResource(auth)
+        self.resource = api.comments
         self.resource._request = MockRequest()
 
     def test_get(self):

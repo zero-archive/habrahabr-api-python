@@ -23,7 +23,7 @@
 import sys
 import json
 import logging
-from .errors import ApiHandlerError
+from habrahabr.errors import ApiHandlerError
 
 try:
     # python3

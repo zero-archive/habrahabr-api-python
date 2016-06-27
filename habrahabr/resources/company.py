@@ -21,41 +21,42 @@
 # SOFTWARE.
 
 from .base import BaseResource
-from .utils import accepts
+from habrahabr.utils import accepts
 
 
-class FeedResource(BaseResource):
-    """Ресурс работы с "основной" лентой постов."""
+class CompanyResource(BaseResource):
+    """Ресурс работы с компаниями."""
 
     def __init__(self, *args, **kwargs):
-        super(FeedResource, self).__init__(*args, **kwargs)
+        super(CompanyResource, self).__init__(*args, **kwargs)
+
+    @accepts(str, int)
+    def posts(self, alias, page=1):
+        """Возвращает посты компании по алиасу компании.
+
+        :param alias: Номер поста.
+        :param page: Номер страницы.
+        :returns: ответ API сервера.
+        :rtype: dict
+        """
+        return self._request('/company/%s?page=%d' % (alias, page))
+
+    @accepts(str)
+    def info(self, alias):
+        """Возвращает профиль компании по алиасу компании.
+
+        :param alias: Номер поста.
+        :returns: ответ API сервера.
+        :rtype: dict
+        """
+        return self._request('/company/%s/info' % alias)
 
     @accepts(int)
-    def habred(self, page=1):
-        """Возвращает "Захабренные" посты из "основной" лентой постов.
+    def list(self, page=1):
+        """Возвращает список компаний.
 
         :param page: Номер страницы.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/feed/habred?page=%d' % page)
-
-    @accepts(int)
-    def unhabred(self, page=1):
-        """Возвращает "Отхабренные" посты из "основной" лентой постов.
-
-        :param page: Номер страницы.
-        :returns: ответ API сервера.
-        :rtype: dict
-        """
-        return self._request('/feed/unhabred?page=%d' % page)
-
-    @accepts(int)
-    def new(self, page=1):
-        """Возвращает "Новые" посты из "основной" лентой постов.
-
-        :param page: Номер страницы.
-        :returns: ответ API сервера.
-        :rtype: dict
-        """
-        return self._request('/feed/new?page=%d' % page)
+        return self._request('/companies?page=%d' % page)

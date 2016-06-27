@@ -38,8 +38,9 @@ class FlowResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.FlowResource(auth)
+        self.resource = api.flow
         self.resource._request = MockRequest()
 
     def test_list(self):

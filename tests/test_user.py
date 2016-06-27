@@ -38,8 +38,9 @@ class UserResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.UserResource(auth)
+        self.resource = api.user
         self.resource._request = MockRequest()
 
     def test_me(self):

@@ -20,17 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .comments import CommentsResource
-from .company import CompanyResource
-from .feed import FeedResource
-from .flow import FlowResource
-from .hub import HubResource
-from .poll import PollResource
-from .post import PostResource
-from .search import SearchResource
-from .settings import SettingsResource
-from .tracker import TrackerResource
-from .user import UserResource
+# from .comments import CommentsResource
+# from .company import CompanyResource
+# from .feed import FeedResource
+# from .flow import FlowResource
+# from .hub import HubResource
+# from .poll import PollResource
+# from .post import PostResource
+# from .search import SearchResource
+# from .settings import SettingsResource
+# from .tracker import TrackerResource
+# from .user import UserResource
+from .resources import *
 from .errors import ApiHandlerError
 
 

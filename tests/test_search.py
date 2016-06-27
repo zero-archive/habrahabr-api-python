@@ -38,8 +38,9 @@ class SearchResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.SearchResource(auth)
+        self.resource = api.search
         self.resource._request = MockRequest()
 
     def test_posts(self):

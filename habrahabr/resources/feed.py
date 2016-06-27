@@ -21,63 +21,41 @@
 # SOFTWARE.
 
 from .base import BaseResource
-from .utils import accepts
+from habrahabr.utils import accepts
 
 
-class FlowResource(BaseResource):
-    """Ресурс работы с потоками."""
+class FeedResource(BaseResource):
+    """Ресурс работы с "основной" лентой постов."""
 
     def __init__(self, *args, **kwargs):
-        super(FlowResource, self).__init__(*args, **kwargs)
+        super(FeedResource, self).__init__(*args, **kwargs)
 
-    def list(self):
-        """Возвращает список потоков.
-
-        :returns: ответ API сервера.
-        :rtype: dict
-        """
-        return self._request('/flows')
-
-    @accepts(str, int)
-    def interesting(self, alias, page=1):
+    @accepts(int)
+    def habred(self, page=1):
         """Возвращает "Захабренные" посты из "основной" лентой постов.
 
-        :param alias: Алиаса потока.
         :param page: Номер страницы.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/flows/%s/interesting?page=%d' % (alias, page))
+        return self._request('/feed/habred?page=%d' % page)
 
-    @accepts(str, int)
-    def all(self, alias, page=1):
-        """Возвращает "Все" посты посты из потока.
+    @accepts(int)
+    def unhabred(self, page=1):
+        """Возвращает "Отхабренные" посты из "основной" лентой постов.
 
-        :param alias: Алиаса потока.
         :param page: Номер страницы.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/flows/%s/all?page=%d' % (alias, page))
+        return self._request('/feed/unhabred?page=%d' % page)
 
-    @accepts(str, int)
-    def best(self, alias, page=1):
-        """Возвращает "Лучшие" посты из потока.
+    @accepts(int)
+    def new(self, page=1):
+        """Возвращает "Новые" посты из "основной" лентой постов.
 
-        :param alias: Алиаса потока.
         :param page: Номер страницы.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/flows/%s/best?page=%d' % (alias, page))
-
-    @accepts(str, int)
-    def hubs(self, alias, page=1):
-        """Возвращает список хабов потока.
-
-        :param alias: Алиаса потока.
-        :param page: Номер страницы.
-        :returns: ответ API сервера.
-        :rtype: dict
-        """
-        return self._request('/flows/%s/hubs?page=%d' % (alias, page))
+        return self._request('/feed/new?page=%d' % page)

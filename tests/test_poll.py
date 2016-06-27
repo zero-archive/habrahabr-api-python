@@ -38,8 +38,9 @@ class PollResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.PollResource(auth)
+        self.resource = api.poll
         self.resource._request = MockRequest()
 
     def test_get(self):

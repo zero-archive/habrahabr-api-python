@@ -21,43 +21,41 @@
 # SOFTWARE.
 
 from .base import BaseResource
-from .utils import accepts
+from habrahabr.utils import accepts
 
 
-class SearchResource(BaseResource):
-    """Ресурс работы с поиском."""
+class PollResource(BaseResource):
+    """Ресурс работы с опросами."""
 
     def __init__(self, *args, **kwargs):
-        super(SearchResource, self).__init__(*args, **kwargs)
+        super(PollResource, self).__init__(*args, **kwargs)
 
-    @accepts(str, int)
-    def posts(self, q, page=1):
-        """Поиск произвольного запроса по постам.
+    @accepts(int)
+    def get(self, poll_id):
+        """Возвращает опрос по номеру.
 
-        :param q: Поисковая фраза.
-        :param page: Номер страницы.
+        :param poll_id: Номер опроса.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/search/posts/%s?page=%d' % (q, page))
+        return self._request('/polls/%d' % poll_id)
 
-    @accepts(str, int)
-    def users(self, q, page=1):
-        """Поиск произвольного запроса по пользователям.
+    @accepts(int, [int], [list])
+    def vote(self, poll_id, vote_id=None, votes_ids=None):
+        """Голосование в опросе за один или несколько варинатов ответа.
 
-        :param q: Поисковая фраза.
-        :param page: Номер страницы.
+        :param poll_id: Номер опроса.
+        :param vote_id: Номер варината ответа.
+        :param votes_ids: Номера варинатов ответа.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/search/users/%s?page=%d' % (q, page))
+        if not vote_id and not votes_ids:
+            raise ValueError('Vote or votes is not defined')
 
-    @accepts(str)
-    def hubs(self, q):
-        """Поиск произвольного запроса по хабам.
+        if vote_id:
+            votes_ids = [vote_id]
 
-        :param q: Поисковая фраза.
-        :returns: ответ API сервера.
-        :rtype: dict
-        """
-        return self._request('/hubs/search/%s' % q)
+        return self._request('/polls/%d/vote' % poll_id, 'PUT', {
+            'id': votes_ids
+        })

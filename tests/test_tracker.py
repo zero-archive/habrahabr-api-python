@@ -38,8 +38,9 @@ class TrackerResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.TrackerResource(auth)
+        self.resource = api.tracker
         self.resource._request = MockRequest()
 
     def test_push(self):

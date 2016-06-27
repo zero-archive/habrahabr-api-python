@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 from .base import BaseResource
-from .utils import accepts
+from habrahabr.utils import accepts
 
 
 class UserResource(BaseResource):

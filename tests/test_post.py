@@ -38,8 +38,9 @@ class PostResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.PostResource(auth)
+        self.resource = api.post
         self.resource._request = MockRequest()
 
     def test_get(self):

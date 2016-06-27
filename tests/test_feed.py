@@ -38,8 +38,9 @@ class FeedResourceTest(BaseTest, unittest.TestCase):
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
+        api = habrahabr.Api(auth)
 
-        self.resource = habrahabr.FeedResource(auth)
+        self.resource = api.feed
         self.resource._request = MockRequest()
 
     def test_habred(self):

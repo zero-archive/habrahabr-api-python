@@ -21,42 +21,43 @@
 # SOFTWARE.
 
 from .base import BaseResource
-from .utils import accepts
+from habrahabr.utils import accepts
 
 
-class CompanyResource(BaseResource):
-    """Ресурс работы с компаниями."""
+class SearchResource(BaseResource):
+    """Ресурс работы с поиском."""
 
     def __init__(self, *args, **kwargs):
-        super(CompanyResource, self).__init__(*args, **kwargs)
+        super(SearchResource, self).__init__(*args, **kwargs)
 
     @accepts(str, int)
-    def posts(self, alias, page=1):
-        """Возвращает посты компании по алиасу компании.
+    def posts(self, q, page=1):
+        """Поиск произвольного запроса по постам.
 
-        :param alias: Номер поста.
+        :param q: Поисковая фраза.
         :param page: Номер страницы.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/company/%s?page=%d' % (alias, page))
+        return self._request('/search/posts/%s?page=%d' % (q, page))
+
+    @accepts(str, int)
+    def users(self, q, page=1):
+        """Поиск произвольного запроса по пользователям.
+
+        :param q: Поисковая фраза.
+        :param page: Номер страницы.
+        :returns: ответ API сервера.
+        :rtype: dict
+        """
+        return self._request('/search/users/%s?page=%d' % (q, page))
 
     @accepts(str)
-    def info(self, alias):
-        """Возвращает профиль компании по алиасу компании.
+    def hubs(self, q):
+        """Поиск произвольного запроса по хабам.
 
-        :param alias: Номер поста.
+        :param q: Поисковая фраза.
         :returns: ответ API сервера.
         :rtype: dict
         """
-        return self._request('/company/%s/info' % alias)
-
-    @accepts(int)
-    def list(self, page=1):
-        """Возвращает список компаний.
-
-        :param page: Номер страницы.
-        :returns: ответ API сервера.
-        :rtype: dict
-        """
-        return self._request('/companies?page=%d' % page)
+        return self._request('/hubs/search/%s' % q)

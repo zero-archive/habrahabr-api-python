@@ -22,18 +22,19 @@
 
 from .api import Api
 from .auth import Auth
-from .base import BaseResource
-from .comments import CommentsResource
-from .company import CompanyResource
-from .feed import FeedResource
-from .flow import FlowResource
-from .hub import HubResource
-from .poll import PollResource
-from .post import PostResource
-from .search import SearchResource
-from .settings import SettingsResource
-from .tracker import TrackerResource
-from .user import UserResource
+from .resources import *
+
+# from .comments import CommentsResource
+# from .company import CompanyResource
+# from .feed import FeedResource
+# from .flow import FlowResource
+# from .hub import HubResource
+# from .poll import PollResource
+# from .post import PostResource
+# from .search import SearchResource
+# from .settings import SettingsResource
+# from .tracker import TrackerResource
+# from .user import UserResource
 from .errors import AuthHandlerError, ApiHandlerError
 
 # Set default logging handler to avoid "No handler found" warnings.
