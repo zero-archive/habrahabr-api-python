@@ -34,7 +34,7 @@ from tests.base import MockRequest
 
 
 class FlowResourceTest(BaseTest, unittest.TestCase):
-    """This object represents Tests for PostResource."""
+    """This object represents Tests for FlowResource."""
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')

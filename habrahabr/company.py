@@ -25,7 +25,7 @@ from .utils import accepts
 
 
 class CompanyResource(BaseResource):
-    """Ресурс работы с комментариями."""
+    """Ресурс работы с компаниями."""
 
     def __init__(self, *args, **kwargs):
         super(CompanyResource, self).__init__(*args, **kwargs)

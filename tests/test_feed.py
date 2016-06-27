@@ -34,7 +34,7 @@ from tests.base import MockRequest
 
 
 class FeedResourceTest(BaseTest, unittest.TestCase):
-    """This object represents Tests for PostResource."""
+    """This object represents Tests for FeedResource."""
 
     def setUp(self):
         auth = habrahabr.Auth(client='foo.bar', token='foobar')

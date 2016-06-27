@@ -219,7 +219,8 @@ class UserResourceTest(BaseTest, unittest.TestCase):
     def test_favorites_comments(self):
         """Test UserResource.favorites_comments(login, page) method"""
         self.resource._request.register_uri(
-            'GET', '/users/dotzero/favorites/comments?page=2', 'fixture_post.json')
+            'GET', '/users/dotzero/favorites/comments?page=2',
+            'fixture_post.json')
 
         response = self.resource.favorites_comments('dotzero', 2)
 

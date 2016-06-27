@@ -33,7 +33,7 @@ from tests.base import BaseTest
 from tests.base import MockRequest
 
 
-class SettingsResourceTest(BaseTest, unittest.TestCase):
+class TrackerResourceTest(BaseTest, unittest.TestCase):
     """This object represents Tests for TrackerResource."""
 
     def setUp(self):

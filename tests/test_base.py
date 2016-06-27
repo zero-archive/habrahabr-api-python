@@ -41,6 +41,7 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
         self.base = habrahabr.BaseResource(auth)
 
     def test_request_get(self):
+        """Test GET BaseResource._request(url, method, data) method"""
         r = self.base._request('/get', 'GET', {
             'foo': 'bar'
         })
@@ -50,6 +51,7 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
         self.assertEqual(r['headers']['Token'], 'foobar')
 
     def test_request_post(self):
+        """Test POST BaseResource._request(url, method, data) method"""
         r = self.base._request('/post', 'POST', {
             'foo': 'bar'
         })
@@ -60,6 +62,7 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
         self.assertEqual(r['form']['foo'], 'bar')
 
     def test_request_put(self):
+        """Test PUT BaseResource._request(url, method, data) method"""
         r = self.base._request('/put', 'PUT', {
             'foo': 'bar'
         })
@@ -70,6 +73,7 @@ class BaseResourceTest(BaseTest, unittest.TestCase):
         self.assertEqual(r['form']['foo'], 'bar')
 
     def test_request_delete(self):
+        """Test DELETE BaseResource._request(url, method, data) method"""
         r = self.base._request('/delete', 'DELETE', {
             'foo': 'bar'
         })
