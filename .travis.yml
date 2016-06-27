@@ -1,0 +1,18 @@
+language: python
+
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+
+install:
+  - pip install scrutinizer-ocular
+  - pip install -r requirements-dev.txt
+
+script:
+  - nosetests -v --with-coverage --cover-package=habrahabr/
+  - flake8 habrahabr
+
+after_success:
+  - ocular --data-file ".coverage" --config-file ".coveragerc"

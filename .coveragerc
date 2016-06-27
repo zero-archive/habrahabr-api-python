@@ -1,0 +1,5 @@
+[run]
+source = habrahabr
+
+[report]
+omit = tests/

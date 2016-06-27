@@ -1,0 +1,13 @@
+checks:
+  python:
+    code_rating: true
+    duplicate_code: true
+    variables_redefined_outer_name: true
+
+filter:
+  excluded_paths:
+    - test/*
+
+tools:
+  external_code_coverage:
+    timeout: 1200
