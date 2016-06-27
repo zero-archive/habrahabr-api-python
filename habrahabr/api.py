@@ -25,6 +25,7 @@ from .comments import CommentsResource
 from .company import CompanyResource
 from .feed import FeedResource
 from .flow import FlowResource
+from .hub import HubResource
 from .errors import ApiHandlerError
 
 
@@ -39,3 +40,4 @@ class Api(object):
         self.company = CompanyResource(self.auth)
         self.feed = FeedResource(self.auth)
         self.flow = FlowResource(self.auth)
+        self.hub = HubResource(self.auth)
