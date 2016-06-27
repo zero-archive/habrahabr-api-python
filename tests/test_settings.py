@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Copyright (c) 2016 dotzero <mail@dotzero.ru>
@@ -20,30 +21,37 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .post import PostResource
-from .comments import CommentsResource
-from .company import CompanyResource
-from .feed import FeedResource
-from .flow import FlowResource
-from .hub import HubResource
-from .poll import PollResource
-from .search import SearchResource
-from .settings import SettingsResource
-from .errors import ApiHandlerError
+"""This module contains a object that represents Tests for SettingsResource"""
+
+import unittest
+import sys
+
+sys.path.append('.')
+
+import habrahabr
+from tests.base import BaseTest
+from tests.base import MockRequest
 
 
-class Api(object):
-    def __init__(self, auth=None):
-        if auth is None:
-            raise ApiHandlerError('Auth handler is not defined')
+class SettingsResourceTest(BaseTest, unittest.TestCase):
+    """This object represents Tests for SettingsResource."""
 
-        self.auth = auth
-        self.post = PostResource(self.auth)
-        self.comments = CommentsResource(self.auth)
-        self.company = CompanyResource(self.auth)
-        self.feed = FeedResource(self.auth)
-        self.flow = FlowResource(self.auth)
-        self.hub = HubResource(self.auth)
-        self.poll = PollResource(self.auth)
-        self.search = SearchResource(self.auth)
-        self.settings = SettingsResource(self.auth)
+    def setUp(self):
+        auth = habrahabr.Auth(client='foo.bar', token='foobar')
+
+        self.resource = habrahabr.SettingsResource(auth)
+        self.resource._request = MockRequest()
+
+    def test_agreement(self):
+        """Test SettingsResource.agreement() method"""
+        self.resource._request.register_uri(
+            'PUT', '/settings/agreement')
+
+        response = self.resource.agreement()
+
+        self.assertEqual(response['ok'], 1)
+        self.assertTrue('server_time' in response)
+
+
+if __name__ == '__main__':
+    unittest.main()

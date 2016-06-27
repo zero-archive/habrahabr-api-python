@@ -20,30 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .post import PostResource
-from .comments import CommentsResource
-from .company import CompanyResource
-from .feed import FeedResource
-from .flow import FlowResource
-from .hub import HubResource
-from .poll import PollResource
-from .search import SearchResource
-from .settings import SettingsResource
-from .errors import ApiHandlerError
+from .base import BaseResource
 
 
-class Api(object):
-    def __init__(self, auth=None):
-        if auth is None:
-            raise ApiHandlerError('Auth handler is not defined')
+class SettingsResource(BaseResource):
+    """Ресурс работы с настройками профиля."""
 
-        self.auth = auth
-        self.post = PostResource(self.auth)
-        self.comments = CommentsResource(self.auth)
-        self.company = CompanyResource(self.auth)
-        self.feed = FeedResource(self.auth)
-        self.flow = FlowResource(self.auth)
-        self.hub = HubResource(self.auth)
-        self.poll = PollResource(self.auth)
-        self.search = SearchResource(self.auth)
-        self.settings = SettingsResource(self.auth)
+    def __init__(self, *args, **kwargs):
+        super(SettingsResource, self).__init__(*args, **kwargs)
+
+    def agreement(self):
+        """Принять соглашение.
+
+        :returns: ответ API сервера.
+        :rtype: dict
+        """
+        return self._request('/settings/agreement', 'PUT')
