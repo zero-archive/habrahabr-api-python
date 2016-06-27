@@ -20,13 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .post import PostResource
 from .comments import CommentsResource
 from .company import CompanyResource
 from .feed import FeedResource
 from .flow import FlowResource
 from .hub import HubResource
 from .poll import PollResource
+from .post import PostResource
 from .search import SearchResource
 from .settings import SettingsResource
 from .tracker import TrackerResource
@@ -40,13 +40,13 @@ class Api(object):
             raise ApiHandlerError('Auth handler is not defined')
 
         self.auth = auth
-        self.post = PostResource(self.auth)
         self.comments = CommentsResource(self.auth)
         self.company = CompanyResource(self.auth)
         self.feed = FeedResource(self.auth)
         self.flow = FlowResource(self.auth)
         self.hub = HubResource(self.auth)
         self.poll = PollResource(self.auth)
+        self.post = PostResource(self.auth)
         self.search = SearchResource(self.auth)
         self.settings = SettingsResource(self.auth)
         self.tracker = TrackerResource(self.auth)

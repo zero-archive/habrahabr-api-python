@@ -20,16 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .auth import Auth
 from .api import Api
+from .auth import Auth
 from .base import BaseResource
-from .post import PostResource
 from .comments import CommentsResource
 from .company import CompanyResource
 from .feed import FeedResource
 from .flow import FlowResource
 from .hub import HubResource
 from .poll import PollResource
+from .post import PostResource
 from .search import SearchResource
 from .settings import SettingsResource
 from .tracker import TrackerResource
@@ -50,8 +50,8 @@ logging.getLogger(__name__).addHandler(NullHandler())
 
 __author__ = 'mail@dotzero.ru'
 __version__ = '0.1.0'
-__all__ = ('Auth', 'Api', 'BaseResource', 'PostResource',
-           'CommentsResource', 'CompanyResource', 'FeedResource',
-           'FlowResource', 'AuthHandlerError', 'HubResource',
-           'PollResource', 'SettingsResource', 'SearchResource',
-           'TrackerResource', 'UserResource', 'ApiHandlerError')
+__all__ = ('Api', 'ApiHandlerError', 'Auth', 'AuthHandlerError',
+           'BaseResource', 'CommentsResource', 'CompanyResource',
+           'FeedResource', 'FlowResource', 'HubResource', 'PollResource',
+           'PostResource', 'SearchResource', 'SettingsResource',
+           'TrackerResource', 'UserResource')
