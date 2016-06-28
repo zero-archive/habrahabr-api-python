@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""This module contains a object that represents a FlowResource."""
 
 from .base import BaseResource
 from habrahabr.utils import accepts
@@ -28,6 +29,7 @@ class FlowResource(BaseResource):
     """Ресурс работы с потоками."""
 
     def __init__(self, *args, **kwargs):
+        """Конструктор ресурса."""
         super(FlowResource, self).__init__(*args, **kwargs)
 
     def list(self):

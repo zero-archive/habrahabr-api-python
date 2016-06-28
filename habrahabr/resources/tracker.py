@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""This module contains a object that represents a TrackerResource."""
 
 from .base import BaseResource
 from habrahabr.utils import accepts
@@ -28,6 +29,7 @@ class TrackerResource(BaseResource):
     """Ресурс работы с трекером."""
 
     def __init__(self, *args, **kwargs):
+        """Конструктор ресурса."""
         super(TrackerResource, self).__init__(*args, **kwargs)
 
     @accepts(str, str)
@@ -45,8 +47,9 @@ class TrackerResource(BaseResource):
         })
 
     def counters(self):
-        """Возвращает счетчики новых сообщений из трекера,
-           элементы не отмечаются как просмотренные.
+        """Возвращает счетчики новых сообщений из трекера.
+
+           Элементы не отмечаются как просмотренные.
 
         :returns: ответ API сервера.
         :rtype: dict
@@ -55,8 +58,9 @@ class TrackerResource(BaseResource):
 
     @accepts(int)
     def posts(self, page=1):
-        """Возвращает список постов из трекера,
-           элементы не отмечаются как просмотренные.
+        """Возвращает список постов из трекера.
+
+           Элементы не отмечаются как просмотренные.
 
         :param page: Номер страницы.
         :returns: ответ API сервера.
@@ -66,8 +70,9 @@ class TrackerResource(BaseResource):
 
     @accepts(int)
     def subscribers(self, page=1):
-        """Возвращает список подписчиков из трекера,
-           элементы не отмечаются как просмотренные.
+        """Возвращает список подписчиков из трекера.
+
+           Элементы не отмечаются как просмотренные.
 
         :param page: Номер страницы.
         :returns: ответ API сервера.
@@ -77,8 +82,9 @@ class TrackerResource(BaseResource):
 
     @accepts(int)
     def mentions(self, page=1):
-        """Возвращает список упоминаний из трекера,
-           элементы не отмечаются как просмотренные.
+        """Возвращает список упоминаний из трекера.
+
+           Элементы не отмечаются как просмотренные.
 
         :param page: Номер страницы.
         :returns: ответ API сервера.
@@ -87,8 +93,9 @@ class TrackerResource(BaseResource):
         return self._request('/tracker/mentions?page=%d' % page)
 
     def apps(self):
-        """Возвращает список сообщений приложений из трекера,
-           элементы не отмечаются как просмотренные.
+        """Возвращает список сообщений приложений из трекера.
+
+           Элементы не отмечаются как просмотренные.
 
         :returns: ответ API сервера.
         :rtype: dict

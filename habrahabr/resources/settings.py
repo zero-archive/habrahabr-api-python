@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""This module contains a object that represents a SettingsResource."""
 
 from .base import BaseResource
 
@@ -27,6 +28,7 @@ class SettingsResource(BaseResource):
     """Ресурс работы с настройками профиля."""
 
     def __init__(self, *args, **kwargs):
+        """Конструктор ресурса."""
         super(SettingsResource, self).__init__(*args, **kwargs)
 
     def agreement(self):

@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""This module contains a object that represents a BaseResource."""
 
 import sys
 import json
@@ -41,7 +42,14 @@ POST_CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=utf-8'
 
 
 class BaseResource(object):
+    """Базовый ресурс."""
+
     def __init__(self, auth=None):
+        """Конструктор BaseResource.
+
+        :param auth: Экземпляр класса Auth.
+        :rtype: object
+        """
         if auth is None:
             raise ApiHandlerError('Auth handler is not defined')
 

@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""This module contains a object that represents a CommentsResource."""
 
 from .base import BaseResource
 from habrahabr.utils import accepts
@@ -28,6 +29,7 @@ class CommentsResource(BaseResource):
     """Ресурс работы с комментариями."""
 
     def __init__(self, *args, **kwargs):
+        """Конструктор ресурса."""
         super(CommentsResource, self).__init__(*args, **kwargs)
 
     @accepts(int)
