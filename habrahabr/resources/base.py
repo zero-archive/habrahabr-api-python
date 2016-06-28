@@ -48,8 +48,8 @@ class BaseResource(object):
         self._auth = auth
 
     def _request(self, url, method='GET', data=None):
-        url = self._auth.get_request_endpoint() + url
-        headers = self._auth.get_request_headers()
+        url = self._auth.endpoint + url
+        headers = self._auth.headers
 
         if data is not None:
             data = urlencode(data)

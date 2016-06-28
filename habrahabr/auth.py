@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""This module contains a object that represents a Habrahabr Auth."""
 
 import re
 from .errors import AuthHandlerError
@@ -35,7 +36,22 @@ API_AUTH_HOST = 'https://habrahabr.ru/auth/o/login/'
 
 
 class Auth(object):
+    """Этот объект содержит Habrahabr Auth.
+
+    Args:
+        client (Optional[str]): Habrahabr OAuth Client.
+        token (Optional[str]): Habrahabr OAuth Token.
+        api_key (Optional[str]): Habrahabr Api Key.
+    """
+
     def __init__(self, client=None, token=None, api_key=None):
+        """Конструктор Auth.
+
+        :param client: Habrahabr OAuth Client.
+        :param token: Habrahabr OAuth Token.
+        :param api_key: Habrahabr Api Key.
+        :returns:
+        """
         self._client = None
         self._token = None
         self._api_key = None
@@ -48,42 +64,69 @@ class Auth(object):
             self.set_request_apikey(api_key)
 
     def __str__(self):
-        return self._endpoint
+        """Возвращает OAuth Endpoint для доступа к Habrahabr API."""
+        return '%s' % self._endpoint
 
     def __repr__(self):
+        """Возвращает строковое представление объекта."""
         return '%s(%r)' % (self.__class__, self.__dict__)
 
-    def set_request_client(self, client):
-        if not re.match(r'([a-z0-9]+)\.([a-z0-9]+)', client):
-            raise AuthHandlerError('Incorrect API Client: ' + client)
-        self._client = client
-
-    def set_request_token(self, token):
-        if not re.match(r'([a-z0-9]+)', token):
-            raise AuthHandlerError('Incorrect API Token: ' + token)
-        self._token = token
-
-    def set_request_apikey(self, api_key):
-        if not re.match(r'([a-z0-9]+)', api_key):
-            raise AuthHandlerError('Incorrect API Key: ' + api_key)
-        self._api_key = api_key
-
-    def get_request_endpoint(self):
+    @property
+    def endpoint(self):
+        """Получить OAuth Endpoint для доступа к Habrahabr API."""
         return self._endpoint
 
-    def get_request_headers(self):
+    @property
+    def headers(self):
+        """Получить Request Headers для доступа к Habrahabr API."""
         headers = {}
         if (self._client is not None) and (self._token is not None):
             headers = {'client': self._client, 'token': self._token}
         elif self._api_key is not None:
             headers = {'apikey': self._api_key}
+
         return headers
 
+    def set_request_client(self, client):
+        """Установить OAuth Client для доступа к Habrahabr API.
+
+        :param client: OAuth Client для доступа к Habrahabr API.
+        :returns:
+        """
+        if not re.match(r'([a-z0-9]+)\.([a-z0-9]+)', client):
+            raise AuthHandlerError('Incorrect API Client: ' + client)
+        self._client = client
+
+    def set_request_token(self, token):
+        """Установить OAuth Token для доступа к Habrahabr API.
+
+        :param token: OAuth Token для доступа к Habrahabr API.
+        :returns:
+        """
+        if not re.match(r'([a-z0-9]+)', token):
+            raise AuthHandlerError('Incorrect API Token: ' + token)
+        self._token = token
+
+    def set_request_apikey(self, api_key):
+        """Установить ключ для доступа к не персонализированным данным API.
+
+        :param api_key: Ключ для доступа к не персонализированным данным API.
+        :returns:
+        """
+        if not re.match(r'([a-z0-9]+)', api_key):
+            raise AuthHandlerError('Incorrect API Key: ' + api_key)
+        self._api_key = api_key
+
     def get_authorization_url(self, redirect_uri, response_type='code'):
+        """Возращает URL для OAuth авторизации Habrahabr Api.
+
+        :param redirect_uri: OAuth Redirect URL.
+        :param response_type: OAuth Response type.
+        :returns: OAuth authorization URL.
+        :rtype: str
+        """
         if self._client is None:
             raise AuthHandlerError('Incorrect API Client')
-        if self._endpoint is None:
-            raise AuthHandlerError('Incorrect API Endpoint')
 
         payload = {
             'response_type': response_type,

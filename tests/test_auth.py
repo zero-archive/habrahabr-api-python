@@ -78,21 +78,21 @@ class AuthTest(BaseTest, unittest.TestCase):
         self.auth.set_request_apikey('foobar')
         self.assertEqual(self.auth._api_key, 'foobar')
 
-    def test_get_request_endpoint(self):
-        """Test Auth.auth.get_request_endpoint() method"""
-        url = self.auth.get_request_endpoint()
+    def test_endpoint(self):
+        """Test Auth.auth.endpoint property"""
+        url = self.auth.endpoint
         self.assertEqual(self.auth._endpoint, url)
 
-    def test_get_request_headers(self):
-        """Test Auth.get_request_headers() method"""
+    def test_headers(self):
+        """Test Auth.headers property"""
         auth = habrahabr.Auth(client='foo.bar', token='foobar')
-        headers = auth.get_request_headers()
+        headers = auth.headers
         self.assertTrue(self.is_dict(headers))
         self.assertEqual(headers['client'], 'foo.bar')
         self.assertEqual(headers['token'], 'foobar')
 
         auth = habrahabr.Auth(api_key='foobar')
-        headers = auth.get_request_headers()
+        headers = auth.headers
         self.assertTrue(self.is_dict(headers))
         self.assertEqual(headers['apikey'], 'foobar')
 
