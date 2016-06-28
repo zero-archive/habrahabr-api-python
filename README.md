@@ -24,8 +24,6 @@
 
 ### Из Pypi
 
-You can install habrahabr-api-python using:
-
     $ pip install habrahabr-api
 
 ### Из исходников
