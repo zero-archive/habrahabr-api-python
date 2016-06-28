@@ -72,6 +72,11 @@ class BaseTest(object):
     def __init__(self, *args, **kwargs):
         super(BaseTest, self).__init__(*args, **kwargs)
 
+    def assert_is_instance(self, obj, cls):
+        if not isinstance(obj, cls):
+            msg = '%s is not an instance of %r' % (repr(obj), cls)
+            self.fail(msg)
+
     @staticmethod
     def is_json(string):
         try:
