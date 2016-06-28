@@ -19,11 +19,13 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""This module contains a object that represents a Habrahabr Utils."""
 
 from functools import wraps
 
 
 def accepts(*types):
+    """Декоратор для фильтрации входящих параметров."""
     def decorated(f):
         # don't forget self
         assert 1 + len(types) == f.__code__.co_argcount
@@ -43,6 +45,7 @@ def accepts(*types):
 
 
 def lazy(func):
+    """Декоратор для ленивой загрузки."""
     @property
     def wrapper(self):
         attr_name = '__%s' % func.__name__
