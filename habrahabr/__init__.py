@@ -50,7 +50,7 @@ except ImportError:  # pragma: no cover
 logging.getLogger(__name__).addHandler(NullHandler())
 
 __author__ = 'mail@dotzero.ru'
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __all__ = ('Api', 'ApiHandlerError', 'Auth', 'AuthHandlerError',
            'BaseResource', 'CommentsResource', 'CompanyResource',
            'FeedResource', 'FlowResource', 'HubResource', 'PollResource',

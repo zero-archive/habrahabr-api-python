@@ -20,14 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
 import os
 import re
 import codecs
+from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -67,9 +63,9 @@ setup(
     version=find_version('habrahabr', '__init__.py'),
     url='https://github.com/dotzero/habrahabr-api-python',
     description='A python implementation of the Habrahabr.ru API',
-    long_description=read_description('README.md'),
+    long_description=read_description('README.rst'),
     author='dotzero',
     author_email='mail@dotzero.ru',
     license='MIT',
-    packages=['habrahabr']
+    packages=find_packages(exclude=['tests*']),
 )
