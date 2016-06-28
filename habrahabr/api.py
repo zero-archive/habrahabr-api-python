@@ -19,7 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-"""Этот модуль содержит клиент для получения доступа к ресурсам API."""
+"""This module contains a object that represents a Habrahabr Api."""
 
 from .resources.comments import CommentsResource
 from .resources.company import CompanyResource
@@ -37,14 +37,14 @@ from habrahabr.utils import lazy
 
 
 class Api(object):
-    """Этот объект содержит клиент для получения доступа к ресурсам API.
+    """Этот объект содержит Habrahabr Api.
 
     Args:
         auth (object): Экземпляр класса Auth.
     """
 
     def __init__(self, auth=None):
-        """Конструктор.
+        """Конструктор Api.
 
         :param auth: Экземпляр класса Auth.
         :rtype: object
