@@ -1,2 +1,3 @@
-nose
 flake8
+nose
+pep257
