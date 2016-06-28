@@ -19,22 +19,22 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""A library that provides a Python interface to the Habrahabr.ru API"""
 
 from .api import Api
 from .auth import Auth
-from .resources import *
-
-# from .comments import CommentsResource
-# from .company import CompanyResource
-# from .feed import FeedResource
-# from .flow import FlowResource
-# from .hub import HubResource
-# from .poll import PollResource
-# from .post import PostResource
-# from .search import SearchResource
-# from .settings import SettingsResource
-# from .tracker import TrackerResource
-# from .user import UserResource
+from .resources.base import BaseResource
+from .resources.comments import CommentsResource
+from .resources.company import CompanyResource
+from .resources.feed import FeedResource
+from .resources.flow import FlowResource
+from .resources.hub import HubResource
+from .resources.poll import PollResource
+from .resources.post import PostResource
+from .resources.search import SearchResource
+from .resources.settings import SettingsResource
+from .resources.tracker import TrackerResource
+from .resources.user import UserResource
 from .errors import AuthHandlerError, ApiHandlerError
 
 # Set default logging handler to avoid "No handler found" warnings.
@@ -42,7 +42,7 @@ import logging
 
 try:  # Python 2.7+
     from logging import NullHandler
-except ImportError:
+except ImportError:  # pragma: no cover
     class NullHandler(logging.Handler):
         def emit(self, record):
             pass
